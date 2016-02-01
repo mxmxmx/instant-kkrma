@@ -5,6 +5,11 @@
 #define ADC_CS0 1 // top ADC
 #define ADC_CS1 3 // bottom ADC
 
+#define FREQ_FINE A10  // main freq
+#define FREQ_COARSE A9 // main freq
+
+#define CLK_IN 0 // gate in
+
 
 SPISettings MCP3008(4000000, MSBFIRST, SPI_MODE0); 
 
@@ -19,15 +24,30 @@ void timerCallback()
   seq_time = true;  
 }
 
+
+volatile uint16_t CLK = 0x0;
+
+void FASTRUN CLK_ISR() 
+{
+  CLK = 0x1;
+}
+
+
 void setup() {
 
   delay(100);
-  
+  analogReference(EXTERNAL);
+  analogReadRes(12);
+  analogReadAveraging(16); 
+
+  pinMode(CLK_IN,  INPUT);
   pinMode(ADC_CS0, OUTPUT);
   pinMode(ADC_CS1, OUTPUT);
 
   digitalWrite(ADC_CS0, HIGH);
   digitalWrite(ADC_CS1, HIGH);
+
+  attachInterrupt(CLK_IN, CLK_ISR, FALLING);
   
   SPI.setMOSI(11);  
   SPI.setMISO(12);
@@ -182,6 +202,12 @@ void loop() {
         //Serial.print("time wasted:...");Serial.println(micros()-timestamp2);
         timestamp = millis();
         read_MCP3008();
+        Serial.print("freq fine: ");
+        Serial.print(analogRead(FREQ_FINE));
+        Serial.print("| freq coarse: ");
+        Serial.print(analogRead(FREQ_COARSE));
+        Serial.print("| clk: ");
+        Serial.println(digitalReadFast(CLK_IN));
        }
   
      if (millis() - timestamp > xxx>>1) {
