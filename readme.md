@@ -8,3 +8,5 @@
 - core tested and working 
 
 - TD: controller pcb; ymf262, yac512 footprints might be a bit wider.
+
+- teensy 3.x isn't all that suitable...
