@@ -1,3 +1,9 @@
+/*
+ * 
+ * ctrl pcb simplistic test 
+ * 
+ */
+ 
 #include <MCP23S17.h>
 
 #include <SPI.h>
@@ -8,7 +14,7 @@
 MCP23S17 Bank1(&SPI, EXP_CS, 0);
 MCP23S17 Bank2(&SPI, EXP_CS, 1);
 
-IntervalTimer pollTimer; /// make this interrupt based. ie slave pulses T3, request state.?
+IntervalTimer pollTimer; 
 const uint16_t poll_rate = 1500000;
 volatile uint8_t flag;
 
@@ -53,7 +59,7 @@ flag = true;
  * GPA4 = output algo LED 2.1 
  * GPA5 = output algo LED 3.0
  * GPA6 = output algo LED 3.1 
- * GPA7 = ouput env LED
+ * GPA7 = output env LED
  * 
  */
 
@@ -90,16 +96,12 @@ void setup() {
 
 }
 
-void loop() {
+void loop() { 
   
-  
-        if (flag) {
-          
-            flag = false;
-            poll_matrix();
-            
-        }  
-        
+  if (flag) {
+      flag = false;
+      poll_();
+  }  
 }
 
 uint8_t _out;
@@ -129,7 +131,7 @@ void process_buttons(uint8_t inputs) {
   state_prev_ = _inputs;
 }
 
-void poll_matrix() {
+void poll_() {
 
    // port A inputs:
     uint16_t _inputs = Bank1.readPort(0);
@@ -144,9 +146,8 @@ void poll_matrix() {
     
     Bank1.writePort(1, _out);
     Bank2.writePort(0, _out);
-    Bank2.writePort(1, _out);
-         
+    Bank2.writePort(1, _out);        
 }
-
+// end.. 
 
 

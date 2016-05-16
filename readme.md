@@ -9,6 +9,6 @@
 
 - "control" pcb tested and working
 
-- TD: ymf262, yac512 footprints might be a bit wider.
+- TD: ymf262, yac512 footprints might be a bit wider. firmware etc.
 
-- teensy 3.x isn't all that suitable ... (= stm32f4 / something with more pins would have made things easier; and why then use a yahama chip ...)
+- teensy 3.x isn't all that suitable ... (= stm32f4 / something with more pins would have made things easier; and why use a yahama chip ... ?)
