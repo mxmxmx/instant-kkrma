@@ -4,7 +4,7 @@
 ### ... opl3 eurorack thingie / things i don't need.
 
 
-![opl3 module](https://c2.staticflickr.com/8/7308/27236767501_3021fc2851_c.jpg)
+![opl3 module](https://c1.staticflickr.com/5/4784/40013042024_99dfcf09a0_c.jpg)
 
 - "core" pcb tested and working 
 
